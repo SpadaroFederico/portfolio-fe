@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import '../styles/Login.css';
 
 
 function Login(){
@@ -40,7 +40,7 @@ const handleSubmit = async (e) => {
 }
 
     return (
-        <div>
+        <div className='login-container'>
             <h1>Login</h1>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder={'Inserisci la mail'} value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} />
