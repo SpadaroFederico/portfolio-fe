@@ -8,36 +8,36 @@ function Login(){
 
     const navigate = useNavigate();
     
-const [form, setForm] = useState({
-    email: '',
-    password: ''
-});
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    });
 
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        const res = await fetch('http://localhost:3000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(form)
-        })
-        const data = await res.json();
-        if(res.ok){
-            console.log('Login riuscito, token:', data.token);
-            alert('Login riuscito, token: ' + data.token);
-            localStorage.setItem('token', data.token);
-            navigate('/admin')
-        }else{
-            console.error('Errore durante il login:', data.message);
-            alert('Login fallito: ' + data.message);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await fetch('http://localhost:3000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(form)
+            })
+            const data = await res.json();
+            if(res.ok){
+                console.log('Login riuscito, token:', data.token);
+                alert('Login riuscito, token: ' + data.token);
+                localStorage.setItem('token', data.token);
+                navigate('/admin')
+            }else{
+                console.error('Errore durante il login:', data.message);
+                alert('Login fallito: ' + data.message);
+            }
+
+            } catch (error) {
+            console.error('Errore di rete:', error);
         }
-
-        } catch (error) {
-        console.error('Errore di rete:', error);
     }
-}
 
     return (
         <div className='login-container'>

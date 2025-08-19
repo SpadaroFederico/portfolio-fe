@@ -16,7 +16,7 @@ function Admin() {
 
   // --- Stati form ---
   const [formCreateProgetto, setFormCreateProgetto] = useState({
-    titolo: '', descrizione: '', tecnologie: '', link: ''
+    titolo: '', descrizione: '', tecnologie: '', link: '', img: ''
   });
   const [formCreateCertificazione, setFormCreateCertificazione] = useState({
     titolo: '', ente: '', data_conseguimento: '', descrizione: '', link_certificato: ''
@@ -41,7 +41,7 @@ function Admin() {
     const success = await action(payload);
     if (success) {
       alert(editingProgettoId ? 'Progetto aggiornato con successo' : 'Progetto creato con successo');
-      setFormCreateProgetto({ titolo: '', descrizione: '', tecnologie: '', link: '' });
+      setFormCreateProgetto({ titolo: '', descrizione: '', tecnologie: '', link_repo: '', img: '' });
       setEditingProgettoId(null);
     }
   };
@@ -51,7 +51,8 @@ function Admin() {
       titolo: p.titolo || '',
       descrizione: p.descrizione || '',
       tecnologie: p.tecnologie || '',
-      link: p.link || ''
+      link_repo: p.link_repo || '',
+      img: p.img || ''
     });
     setEditingProgettoId(p.id);
   };
@@ -150,8 +151,14 @@ function Admin() {
         <input
           type="text"
           placeholder="Link"
-          value={formCreateProgetto.link}
-          onChange={(e) => setFormCreateProgetto({ ...formCreateProgetto, link: e.target.value })}
+          value={formCreateProgetto.link_repo}
+          onChange={(e) => setFormCreateProgetto({ ...formCreateProgetto, link_repo: e.target.value })}
+        />
+        <input 
+          type="text" 
+          placeholder="Link GIF di anteprima" 
+          value={formCreateProgetto.img} 
+          onChange={(e) => setFormCreateProgetto({ ...formCreateProgetto, img: e.target.value })} 
         />
         <button type="submit">{editingProgettoId ? 'Salva Modifiche' : 'Crea Progetto'}</button>
         {editingProgettoId && (
@@ -261,22 +268,23 @@ function Admin() {
 
     {/* --- LISTE SOTTO --- */}
     <ProgettiList
-  progetti={progetti}
-  onEdit={handleEditProgetto}
-  onDelete={handleDeleteProgetto}
-/>
+      progetti={progetti}
+      onEdit={handleEditProgetto}
+      onDelete={handleDeleteProgetto}
+      isAdmin={true}  
+    />
 
-    <CertificazioniList
-  certificazioni={certificazioni}
-  onEdit={handleEditCertificazione}
-  onDelete={handleDeleteCertificazione}
-/>
+        <CertificazioniList
+      certificazioni={certificazioni}
+      onEdit={handleEditCertificazione}
+      onDelete={handleDeleteCertificazione}
+    />
 
-    <EsperienzeList
-  esperienze={esperienze}
-  onEdit={handleEditEsperienza}
-  onDelete={handleDeleteEsperienza}
-/>
+        <EsperienzeList
+      esperienze={esperienze}
+      onEdit={handleEditEsperienza}
+      onDelete={handleDeleteEsperienza}
+    />
   </div>
 );
 

@@ -13,7 +13,7 @@ const skills = [
   { name: 'GitHub', logo: '/logos/github.png' },
   { name: 'Tailwind CSS', logo: '/logos/tailwindcss.png' },
   { name: 'MySQL', logo: '/logos/mysql.png' },
-  { name: 'Arduino', logo: '/logos/arduino.png' },
+  { name: 'N8N', logo: '/logos/n8n.png' },
   { name: 'GLC5', logo: '/logos/plc.png' },
   { name: 'arm', logo: '/logos/arm.png' },
 ];

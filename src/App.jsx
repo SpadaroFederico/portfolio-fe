@@ -7,6 +7,9 @@ import Login from './pages/Login.jsx'
 import Admin from './pages/Admin.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import ParticlesBackground from "./components/ParticlesBackground";
+import ProgettiPage from './pages/ProgettiPage.jsx';
+import CertificatiPage from './pages/CertificatiPage.jsx';
+import EsperienzePage from './pages/EsperienzePage.jsx';
 import './index.css';
 
 function App() {
@@ -24,6 +27,10 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/progetti" element={<ProgettiPage />} />
+        <Route path="/certificati" element={<CertificatiPage />} />
+        <Route path="/esperienze" element={<EsperienzePage />} />
+        <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </Router>
   )

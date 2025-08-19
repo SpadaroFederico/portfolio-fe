@@ -1,0 +1,174 @@
+/* Admin - lista progetti */
+.admin-progetti {
+  max-width: 700px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  color: #fff;
+}
+
+.admin-progetti h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, #ff00ff, #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-progetti ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-progetti li {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-progetti img {
+  display: block;
+  margin: 0.5rem auto;
+  border-radius: 6px;
+}
+
+.admin-progetti h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #ff66ff;
+}
+
+.admin-progetti p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #ddd;
+}
+
+.admin-progetti a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #00ffff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.admin-progetti a:hover {
+  color: #ff00ff;
+}
+
+.admin-progetti button {
+  margin-top: 0.8rem;
+  margin-right: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, #c800ff, #00c8ff);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.admin-progetti button:hover {
+  background: linear-gradient(90deg, #7800c3, #007bff);
+}
+
+.admin-progetti button:active {
+  transform: scale(0.97);
+}
+
+/* Timeline */
+.timeline-element .vertical-timeline-element-content {
+  background: rgba(20,0,40,0.9);
+  color: #fff;
+  padding: 0.6rem 0.8rem !important;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  max-width: 350px;
+  font-size: 0.85rem;
+}
+
+.timeline-element .vertical-timeline-element-content h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+}
+
+/* GIF */
+.project-gif {
+  display: block;
+  margin: 0.5rem auto;
+  width: 300px;
+  max-height: 200px;
+  border-radius: 6px;
+}
+
+/* Testo troncato */
+.project-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Mostra solo 3 righe */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  line-height: 1.3;
+  color: #ddd;
+  margin: 0.2rem 0;
+}
+
+.project-description.expanded {
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  overflow: visible;
+}
+
+
+/* Leggi tutto */
+.read-more-btn {
+  background: none;
+  border: none;
+  color: #00ffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 0.2rem;
+  padding: 0;
+}
+
+.read-more-btn:hover {
+  color: #ff00ff;
+}
+
+/* Link */
+.timeline-element a {
+  font-size: 0.85rem;
+  color: #00ffff;
+  margin: 0.3rem 0; /* margine verticale */
+  display: block;   /* forzato a blocco per stare uno sotto l'altro */
+}
+
+.timeline-element a:hover {
+  color: #ff00ff;
+}
+
+.coming-soon {
+  font-size: 1rem;
+  color: #ddd;
+  text-align: center;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.coming-soon h3 {
+  color: #ff66ff;
+  font-size: 1.2rem;
+}

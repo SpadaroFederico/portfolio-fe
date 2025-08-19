@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Home.css';
 import Skills from '../components/Skills';
+import ContactForm from '../components/ContactForm';
 
 const Home = () => {
   return (
@@ -49,15 +50,7 @@ const Home = () => {
           </ul>
         </div>
 
-        <div className="contact__form-box">
-          <h2>Contattami</h2>
-          <form>
-            <input type="text" placeholder="Il tuo nome" required />
-            <input type="email" placeholder="La tua email" required />
-            <textarea placeholder="Il tuo messaggio" required></textarea>
-            <button type="submit">Invia</button>
-          </form>
-        </div>
+        <ContactForm />
       </section>
     </div>
   );
