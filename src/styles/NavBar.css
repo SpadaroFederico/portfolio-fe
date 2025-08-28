@@ -1,18 +1,21 @@
+/* Navbar principale - desktop */
 .navbar {
-  position: sticky;
-  top: 10px;
-  width: 65%;
+  position: fixed;      
+  top: 10px;             
+  left: 50%;            
+  transform: translateX(-50%);
+  width: 30%;           
   max-width: 1200px;
-  height: 80px; /* leggermente più alto */
+  min-width: 320px;     /* assicura che non si restringa troppo */
+  height: 80px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  margin: 0 auto;
-  padding: 0 20px; /* padding ridotto per avvicinare toggle */
+  padding: 0 20px;
   border-radius: 50px;
   background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
   box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-  z-index: 1000;
+  z-index: 4000;
 }
 
 .navbar__nav {
@@ -70,7 +73,8 @@
   height: 4px;
   border-radius: 2px;
   background: linear-gradient(90deg, #ff00ff, #00ffff);
-  transition: width 0.3s ease;
+  translate: Y(-6px); /* leggero distacco dall'icona */
+  transition: opacity 0.3s ease;
   opacity: 0; /* visibile solo al hover */
 }
 
@@ -96,4 +100,33 @@
   background: rgba(255,255,255,0.1);
   color: #ffffff;
   border-color: #ffffff;
+}
+
+/* Schermi medi: tablet e piccoli desktop */
+@media (max-width: 1169px) {
+  .navbar {
+    width: 40%; /* leggermente più larga per contenuti */
+  }
+}
+
+/* Schermi piccoli: smartphone */
+@media (max-width: 768px) {
+  .navbar {
+    width: 60%; /* non pieno schermo ma visibile */
+    padding: 0 10px;
+    height: 70px; /* leggermente più basso */
+  }
+
+  .navbar__nav {
+    gap: 20px; /* riduci lo spazio tra icone */
+  }
+
+  .navbar__link {
+    font-size: 1rem;
+    padding: 6px 10px;
+  }
+
+  .navbar__icon {
+    font-size: 1.4rem;
+  }
 }

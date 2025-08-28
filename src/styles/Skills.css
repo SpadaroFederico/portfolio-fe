@@ -5,8 +5,14 @@
 }
 
 .skills h2 {
-  font-size: 1.8rem;
+  font-size: 2.8rem;
+  font-weight: 700;
   margin-bottom: 2rem;
+  line-height: 1.2;
+  background: linear-gradient(90deg, #ff00ff, #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .skills__grid {

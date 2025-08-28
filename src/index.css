@@ -25,3 +25,8 @@ body {
   z-index: -1; /* dietro a tutto */
   background: linear-gradient(to bottom, #1a237e, #4a148c, #000);
 }
+
+.home {
+  scroll-behavior: smooth;
+}
+

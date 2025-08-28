@@ -1,12 +1,10 @@
 import React from 'react';
 import CertificazioniList from '../components/admin/CertificazioniList';
+import { DataContext } from '../context/DataContext';
+import { useContext, useEffect } from 'react';
 
 
-export default function CertficazioniPage() {
-    return (
-        <div>
-            <h1>Progetti</h1>
-            <CertificazioniList/>
-        </div>
-    );
+export default function CertificazioniPage() {
+  return <CertificazioniList isAdmin={false} />;
 }
+

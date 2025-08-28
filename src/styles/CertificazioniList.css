@@ -1,0 +1,215 @@
+.certificazioni-page {
+  max-width: 1000px;
+  margin: 5rem auto;
+  padding: 2rem;
+  background: radial-gradient(circle at top, rgba(25,0,50,0.9) 0%, rgba(0,0,0,0.85) 100%);
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+.certificazioni-page h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2.5rem;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #ff00ff, #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.certificazioni-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 1.8rem;
+}
+.cert-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  padding: 6px; /* spazio tra bordo e contenuto */
+  border-radius: 12px; /* arrotondamento coerente con la card */
+  background-clip: padding-box; /* evita che il bordo si sovrapponga al contenuto */
+}
+
+/* Card vera e propria */
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1.4rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  backdrop-filter: blur(6px);
+
+  /* bordo gradient leggero */
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #ff00ff, #00ffff) 1;
+}
+
+.cert-card:hover {
+  cursor: pointer;
+}
+
+.cert-card img {
+  display: block;
+  margin: 0 auto 1rem;
+  width: auto;          /* mantiene la larghezza naturale */
+  max-width: 100%;       /* limita la dimensione massima */
+  height: auto;         /* mantiene proporzioni */
+  max-height: 200px;    /* evita che l’immagine diventi troppo alta */
+}
+
+.cert-card .img-wrapper {
+  display: flex;
+  align-items: center;  /* centra verticalmente l’immagine */
+  justify-content: center; /* centra orizzontalmente */
+  height: 200px;        /* altezza uniforme del contenitore */
+  margin-bottom: 1rem;
+}
+
+.cert-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #ff80ff;
+  min-height: 3.5rem;
+}
+
+.cert-card .ente {
+  display: inline-block;
+  font-weight: bold;
+  font-size: 0.85rem;
+  color: #00ffff;
+  margin-bottom: 0.4rem;
+}
+
+.cert-card .data {
+  font-size: 0.8rem;
+  color: #bbb;
+  margin-bottom: 0.8rem;
+}
+
+.cert-card .descrizione {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #ddd;
+  max-height: 4.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cert-card .descrizione.expanded {
+  max-height: none;
+}
+
+.cert-card button {
+  background: none;
+  border: none;
+  color: #00ffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+  padding: 0;
+}
+
+.cert-card button:hover {
+  color: #ff00ff;
+}
+
+.cert-card button:active {
+  transform: scale(0.97);
+}
+
+/* Admin Certificazioni */
+.admin-certificazioni {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 1.5rem;
+  background: linear-gradient(145deg, rgba(20,0,40,0.85), rgba(0,0,0,0.7));
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+.admin-certificazioni h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: 1.8rem;
+  background: linear-gradient(90deg, #ff00ff, #00ffff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.admin-certificazioni ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.admin-certificazioni li {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-certificazioni li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.admin-certificazioni img {
+  display: block;
+  margin: 0.5rem auto;
+  max-width: 180px;
+  border-radius: 6px;
+}
+
+.admin-certificazioni h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: #ff66ff;
+}
+
+.admin-certificazioni p {
+  margin: 0.2rem 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  color: #ddd;
+}
+
+.admin-certificazioni span {
+  font-weight: 600;
+  color: #00ffff;
+}
+
+.admin-certificazioni button {
+  margin-top: 0.5rem;
+  margin-right: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  background: linear-gradient(90deg, #c800ff, #00c8ff);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.admin-certificazioni button:hover {
+  background: linear-gradient(90deg, #7800c3, #007bff);
+}
+
+.admin-certificazioni button:active {
+  transform: scale(0.97);
+}

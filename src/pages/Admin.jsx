@@ -19,7 +19,7 @@ function Admin() {
     titolo: '', descrizione: '', tecnologie: '', link: '', img: ''
   });
   const [formCreateCertificazione, setFormCreateCertificazione] = useState({
-    titolo: '', ente: '', data_conseguimento: '', descrizione: '', link_certificato: ''
+    titolo: '', ente: '', data_conseguimento: '', descrizione: '', img: ''
   });
   const [formCreateEsperienza, setFormCreateEsperienza] = useState({
     titolo: '', azienda: '', inizio: '', fine: '', descrizione: ''
@@ -63,19 +63,31 @@ function Admin() {
 
   // --- Gestione Certificazioni ---
   const handleSubmitCertificazione = async (e) => {
-    e.preventDefault();
-    const action = editingCertificazioneId ? updateCertificazione : createCertificazione;
-    const payload = editingCertificazioneId
-      ? { ...formCreateCertificazione, id: editingCertificazioneId }
-      : formCreateCertificazione;
+  e.preventDefault();
 
-    const success = await action(payload);
-    if (success) {
-      alert(editingCertificazioneId ? 'Certificazione aggiornata con successo' : 'Certificazione creata con successo');
-      setFormCreateCertificazione({ titolo: '', ente: '', data_conseguimento: '', descrizione: '', link_certificato: '' });
-      setEditingCertificazioneId(null);
-    }
-  };
+  let payload = editingCertificazioneId
+    ? { ...formCreateCertificazione, id: editingCertificazioneId }
+    : formCreateCertificazione;
+
+  // Rimuove campi vuoti (img o descrizione)
+  Object.keys(payload).forEach(key => {
+    if (payload[key] === '') delete payload[key];
+  });
+
+  // Normalizza la data
+  if (payload.data_conseguimento?.includes('T')) {
+    payload.data_conseguimento = payload.data_conseguimento.split('T')[0];
+  }
+
+  const action = editingCertificazioneId ? updateCertificazione : createCertificazione;
+  const success = await action(payload);
+
+  if (success) {
+    alert(editingCertificazioneId ? 'Certificazione aggiornata con successo' : 'Certificazione creata con successo');
+    setFormCreateCertificazione({ titolo: '', ente: '', data_conseguimento: '', descrizione: '', img: '' });
+    setEditingCertificazioneId(null);
+  }
+};
 
   const handleEditCertificazione = (c) => {
     setFormCreateCertificazione({
@@ -83,7 +95,7 @@ function Admin() {
       ente: c.ente || '',
       data_conseguimento: c.data_conseguimento || '',
       descrizione: c.descrizione || '',
-      link_certificato: c.link_certificato || ''
+      img: c.img || ''
     });
     setEditingCertificazioneId(c.id);
   };
@@ -202,9 +214,9 @@ function Admin() {
         />
         <input
           type="text"
-          placeholder="Link certificato"
-          value={formCreateCertificazione.link_certificato}
-          onChange={(e) => setFormCreateCertificazione({ ...formCreateCertificazione, link_certificato: e.target.value })}
+          placeholder="link immagine"
+          value={formCreateCertificazione.img}
+          onChange={(e) => setFormCreateCertificazione({ ...formCreateCertificazione, img: e.target.value })}
         />
         <button type="submit">{editingCertificazioneId ? 'Salva Modifiche' : 'Crea Certificazione'}</button>
         {editingCertificazioneId && (
@@ -212,7 +224,7 @@ function Admin() {
             type="button"
             onClick={() => {
               setEditingCertificazioneId(null);
-              setFormCreateCertificazione({ titolo: '', ente: '', data_conseguimento: '', descrizione: '', link_certificato: '' });
+              setFormCreateCertificazione({ titolo: '', ente: '', data_conseguimento: '', descrizione: '', img: '' });
             }}
           >
             Annulla
@@ -251,6 +263,11 @@ function Admin() {
           value={formCreateEsperienza.descrizione}
           onChange={(e) => setFormCreateEsperienza({ ...formCreateEsperienza, descrizione: e.target.value })}
         />
+        <input type="text" 
+          placeholder='immagine'
+          value={formCreateEsperienza.img}
+          onChange={(e) => setFormCreateEsperienza({ ...formCreateEsperienza, img: e.target.value })}
+        />
         <button type="submit">{editingEsperienzaId ? 'Salva Modifiche' : 'Crea Esperienza'}</button>
         {editingEsperienzaId && (
           <button
@@ -278,12 +295,14 @@ function Admin() {
       certificazioni={certificazioni}
       onEdit={handleEditCertificazione}
       onDelete={handleDeleteCertificazione}
+      isAdmin={true}
     />
 
         <EsperienzeList
       esperienze={esperienze}
       onEdit={handleEditEsperienza}
       onDelete={handleDeleteEsperienza}
+      isAdmin={true}
     />
   </div>
 );

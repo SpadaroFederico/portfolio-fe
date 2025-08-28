@@ -1,6 +1,12 @@
+/* Font globale e colore base */
 .home {
   padding: 2rem;
-  margin-top: 80px; /* per compensare navbar fissa */
+  margin-top: 80px; /* per navbar fissa */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #fff;
+}
+html {
+  scroll-behavior: smooth;
 }
 
 /* Hero section */
@@ -9,82 +15,84 @@
   align-items: center;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap; /* per adattarsi su schermi piccoli */
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
-/* Logo */
 .home__logo {
-  height: 120px;
-  width: 120px;
-  border-radius: 50%; /* rotondo */
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
   object-fit: cover;
-  box-shadow: -15px 15px 6px rgba(0,3,0,0.20);
+  box-shadow: -15px 15px 10px rgba(0,3,0,0.25);
+  transition: transform 0.3s ease;
 }
 
-/* Testo intro */
+.home__logo:hover {
+  transform: scale(1.05);
+}
+
 .home__intro h1 {
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 500;
   margin: 0;
+  line-height: 1.2;
+  color: #c766c7; /* rosa scuro elegante */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
 .home__intro h2 {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-  color: #555;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0.5rem 0 1rem 0;
+  color: #aaa;
 }
 
 .home__intro p {
-  max-width: 500px;
-  line-height: 1.5;
-}
-
-.highlight {
-  color: #007bff;
-}
-
-/* Sezione call-to-action */
-.home__cta {
-  margin-top: 3rem;
-  font-size: 1rem;
-  color: #666;
-}
-
-.home__about {
-  margin: 3rem auto;
-  padding: 2rem;
-  text-align: center;
-  background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  max-width: 800px; /* restringe la larghezza massima */
-}
-
-.home__about h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
-  padding: 0.5rem;
-  color: #fff;
-}
-
-.home__about p {
-  font-size: 1rem;
-  line-height: 1.6; /* migliora leggibilità */
+  max-width: 550px;
+  line-height: 1.6;
+  font-size: 1.1rem;
   color: #ddd;
 }
 
+/* About section */
+.home__about {
+  margin: 3rem auto;
+  padding: 2.5rem;
+  text-align: center;
+  background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  max-width: 800px;
+  scroll-margin-top: 100px;
+}
+
+.home__about h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  padding: 0.5rem;
+  color: #66b2cc; /* azzurro scuro elegante */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+}
+
+.home__about p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #ddd;
+}
+
+/* Contact section */
 .home__contact {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 2rem;
+  gap: 3rem;
   margin: 3rem auto;
   padding: 2rem;
-  border-radius: 8px;
-  max-width: 70%;
   flex-wrap: wrap;
 }
 
-/* Socials */
 .contact__socials {
   flex: 1;
   min-width: 250px;
@@ -92,48 +100,68 @@
 }
 
 .contact__socials h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 1.5rem 0;
+  color: #ff80ff; /* Colore unico distintivo */
 }
 
 .contact__socials ul {
   list-style: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 5%;
 }
 
-.contact__socials li {
-  margin-bottom: 0.8rem;
-}
-
-.contact__socials a {
-  color: #ffffff;
+.contact__socials li a {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #a0fefe;
   text-decoration: none;
-  transition: color 0.3s ease;
+  padding-left: 30%;
+  transition: color 0.3s ease, transform 0.2s ease;
 }
 
-.contact__socials a:hover {
-  color: #ffa64d;
+.contact__socials li a:hover {
+  color: #ff80ff;
+  transform: translateX(5px);
+}
+
+.contact__socials li a i {
+  font-size: 1.3rem;
+  color: #ff80ff;
+  transition: transform 0.2s ease;
+}
+
+.contact__socials li a:hover i {
+  transform: scale(1.2);
 }
 
 /* Form Box */
 .contact__form-box {
   flex: 1;
   min-width: 300px;
-  max-width: 350px; /* stessa larghezza compatta del login */
+  max-width: 400px;
   margin: 0 auto;
   padding: 2rem;
   background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   text-align: center;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 .contact__form-box h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: 500;
   margin-bottom: 1.5rem;
-  color: #ffffff;
+  color: #66b2cc; /* azzurro scuro about */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
 }
 
 .contact__form-box form {
@@ -144,7 +172,7 @@
 
 .contact__form-box input,
 .contact__form-box textarea {
-  padding: 0.8rem 1rem;
+  padding: 0.9rem 1rem;
   border: 2px solid transparent;
   border-radius: 8px;
   font-size: 1rem;
@@ -163,12 +191,12 @@
 }
 
 .contact__form-box textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
 
 .contact__form-box button {
-  padding: 0.8rem;
+  padding: 0.9rem;
   background-color: #c800ff;
   color: #fff;
   font-size: 1rem;
