@@ -1,18 +1,22 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { apiFetch } from '../utils/apiFetch';
 
 const DataContext = createContext();
 
 export default function DataProvider({ children }) {
     // primo fetch progetti
     const [progetti, setProgetti] = useState([]);
- 
+
     useEffect(() => {
         const fetchData = async () => {
-            fetch('http://localhost:3000/api/progetti')
-                .then(res => res.json())
-                .then(data => setProgetti(data))
-                .catch(err => console.error('Errore nel fetch dei progetti:', err));
-        }
+            try {
+                const res = await apiFetch('/api/progetti');
+                const data = await res.json();
+                setProgetti(data);
+            } catch (err) {
+                console.error('Errore nel fetch dei progetti:', err);
+            }
+        };
         fetchData();
     }, [])
 
@@ -21,11 +25,14 @@ export default function DataProvider({ children }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch('http://localhost:3000/api/certificazioni')
-                .then(res => res.json())    
-                .then(data => setCertificazioni(data))
-                .catch(err => console.error('Errore nel fetch delle certificazioni:', err));
-        }
+            try {
+                const res = await apiFetch('/api/certificazioni');
+                const data = await res.json();
+                setCertificazioni(data);
+            } catch (err) {
+                console.error('Errore nel fetch delle certificazioni:', err);
+            }
+        };
         fetchData();
     }, [])
 
@@ -34,27 +41,24 @@ export default function DataProvider({ children }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            fetch('http://localhost:3000/api/esperienze')
-                .then(res => res.json())
-                .then(data => setEsperienze(data))
-                .catch(err => console.error('Errore nel fetch delle esperienze:', err));
-        }
-        fetchData();    
+            try {
+                const res = await apiFetch('/api/esperienze');
+                const data = await res.json();
+                setEsperienze(data);
+            } catch (err) {
+                console.error('Errore nel fetch delle esperienze:', err);
+            }
+        };
+        fetchData();
     }, [])
 
     // funzioni CRUD per progetti
-    // create, update, delete
     const createProgetto = async (nuovoProgetto) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3000/api/progetti', {
-            method: 'POST',
-            headers: { 
-                'content-type': 'application/json', 
-                'Authorization': `Bearer ${token}`
-            },
-            
-            body: JSON.stringify(nuovoProgetto)
+            const res = await apiFetch('/api/progetti', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(nuovoProgetto)
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -71,20 +75,16 @@ export default function DataProvider({ children }) {
     };
 
     const updateProgetto = async (progettoModificato) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3000/api/progetti/${progettoModificato.id}`, {
-            method: 'PUT',
-            headers: { 
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },    
-            body: JSON.stringify(progettoModificato)
+            const res = await apiFetch(`/api/progetti/${progettoModificato.id}`, {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(progettoModificato)
             });
             if (!res.ok) {
-            const err = await res.json();
-            alert('Errore: ' + (err.message || 'Aggiornamento fallito'));
-            return false;
+                const err = await res.json();
+                alert('Errore: ' + (err.message || 'Aggiornamento fallito'));
+                return false;
             }
             setProgetti(progetti.map(p => p.id === progettoModificato.id ? progettoModificato : p));
             return true;
@@ -95,20 +95,15 @@ export default function DataProvider({ children }) {
     };
 
     const deleteProgetto = async (progettoEliminato) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3000/api/progetti/${progettoEliminato.id}`, {
-            method: 'DELETE',
-            headers: { 
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-            
+            const res = await apiFetch(`/api/progetti/${progettoEliminato.id}`, {
+                method: 'DELETE',
+                headers: { 'content-type': 'application/json' }
             });
             if (!res.ok) {
-            const err = await res.json();
-            alert('Errore: ' + (err.message || 'Eliminazione fallita'));
-            return false;
+                const err = await res.json();
+                alert('Errore: ' + (err.message || 'Eliminazione fallita'));
+                return false;
             }
             setProgetti(progetti.filter(p => p.id !== progettoEliminato.id));
             return true;
@@ -120,18 +115,11 @@ export default function DataProvider({ children }) {
 
     // funzioni CRUD per certificazioni
     const createCertificazione = async (nuovaCertificazione) => {
-        const token = localStorage.getItem('token');
-        console.log('Nuova certificazione da inviare:', nuovaCertificazione);
-
         try {
-            const res = await fetch('http://localhost:3000/api/certificazioni', {
-            method: 'POST',
-            headers: { 
-                'content-type': 'application/json', 
-                'Authorization': `Bearer ${token}`
-            },
-            
-            body: JSON.stringify(nuovaCertificazione)
+            const res = await apiFetch('/api/certificazioni', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(nuovaCertificazione)
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -148,20 +136,16 @@ export default function DataProvider({ children }) {
     };
 
     const updateCertificazione = async (certificazioneModificata) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3000/api/certificazioni/${certificazioneModificata.id}`, {
-            method: 'PUT',
-            headers: { 
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },    
-            body: JSON.stringify(certificazioneModificata)
+            const res = await apiFetch(`/api/certificazioni/${certificazioneModificata.id}`, {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(certificazioneModificata)
             });
             if (!res.ok) {
-            const err = await res.json();
-            alert('Errore: ' + (err.message || 'Aggiornamento fallito'));
-            return false;
+                const err = await res.json();
+                alert('Errore: ' + (err.message || 'Aggiornamento fallito'));
+                return false;
             }
             setCertificazioni(certificazioni.map(p => p.id === certificazioneModificata.id ? certificazioneModificata : p));
             return true;
@@ -172,20 +156,15 @@ export default function DataProvider({ children }) {
     };
 
     const deleteCertificazione = async (certificazioneEliminata) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3000/api/certificazioni/${certificazioneEliminata.id}`, {
-            method: 'DELETE',
-            headers: { 
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-            
+            const res = await apiFetch(`/api/certificazioni/${certificazioneEliminata.id}`, {
+                method: 'DELETE',
+                headers: { 'content-type': 'application/json' }
             });
             if (!res.ok) {
-            const err = await res.json();
-            alert('Errore: ' + (err.message || 'Eliminazione fallita'));
-            return false;
+                const err = await res.json();
+                alert('Errore: ' + (err.message || 'Eliminazione fallita'));
+                return false;
             }
             setCertificazioni(certificazioni.filter(p => p.id !== certificazioneEliminata.id));
             return true;
@@ -197,16 +176,11 @@ export default function DataProvider({ children }) {
 
     // funzioni CRUD per esperienze
     const createEsperienza = async (nuovaEsperienza) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch('http://localhost:3000/api/esperienze', {
-            method: 'POST',
-            headers: { 
-                'content-type': 'application/json', 
-                'Authorization': `Bearer ${token}`
-            },
-            
-            body: JSON.stringify(nuovaEsperienza)
+            const res = await apiFetch('/api/esperienze', {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(nuovaEsperienza)
             });
             if (!res.ok) {
                 const err = await res.json();
@@ -223,20 +197,16 @@ export default function DataProvider({ children }) {
     };
 
     const updateEsperienza = async (esperienzaModificata) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3000/api/esperienze/${esperienzaModificata.id}`, {
-            method: 'PUT',
-            headers: { 
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },    
-            body: JSON.stringify(esperienzaModificata)
+            const res = await apiFetch(`/api/esperienze/${esperienzaModificata.id}`, {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(esperienzaModificata)
             });
             if (!res.ok) {
-            const err = await res.json();
-            alert('Errore: ' + (err.message || 'Aggiornamento fallito'));
-            return false;
+                const err = await res.json();
+                alert('Errore: ' + (err.message || 'Aggiornamento fallito'));
+                return false;
             }
             setEsperienze(esperienze.map(p => p.id === esperienzaModificata.id ? esperienzaModificata : p));
             return true;
@@ -247,20 +217,15 @@ export default function DataProvider({ children }) {
     };
 
     const deleteEsperienza = async (esperienzaEliminata) => {
-        const token = localStorage.getItem('token');
         try {
-            const res = await fetch(`http://localhost:3000/api/esperienze/${esperienzaEliminata.id}`, {
-            method: 'DELETE',
-            headers: { 
-                'content-type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            }
-            
+            const res = await apiFetch(`/api/esperienze/${esperienzaEliminata.id}`, {
+                method: 'DELETE',
+                headers: { 'content-type': 'application/json' }
             });
             if (!res.ok) {
-            const err = await res.json();
-            alert('Errore: ' + (err.message || 'Eliminazione fallita'));
-            return false;
+                const err = await res.json();
+                alert('Errore: ' + (err.message || 'Eliminazione fallita'));
+                return false;
             }
             setEsperienze(esperienze.filter(p => p.id !== esperienzaEliminata.id));
             return true;
@@ -270,18 +235,15 @@ export default function DataProvider({ children }) {
         }
     };
 
-    return(
+    return (
         <DataContext.Provider value={{
-            
             progetti, createProgetto, updateProgetto, deleteProgetto,
             certificazioni, createCertificazione, updateCertificazione, deleteCertificazione,
             esperienze, createEsperienza, updateEsperienza, deleteEsperienza
-
         }}>
-            
             {children}
         </DataContext.Provider>
-    )
+    );
 }
 
 export { DataContext };

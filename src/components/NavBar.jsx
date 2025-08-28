@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHouse, FaDiagramProject, FaUser, FaRightFromBracket } from 'react-icons/fa6';
 import '../styles/NavBar.css';
+import { apiFetch } from '../utils/apiFetch'; // importa apiFetch
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,17 +13,14 @@ const Navbar = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('http://localhost:3000/api/auth/protected-check', {
-          method: 'GET',
-          credentials: 'include',
-        });
-        setLoggedIn(res.ok);
+        const res = await apiFetch('/api/auth/protected-check', { method: 'GET' });
+        setLoggedIn(res && res.ok);
       } catch {
         setLoggedIn(false);
       }
     };
     checkAuth();
-  }, [location]); // ricalcola quando cambia la pagina
+  }, [location]);
 
   const onAboutClick = (e) => {
     if (location.pathname === '/') {
@@ -42,10 +40,7 @@ const Navbar = () => {
   };
 
   const logout = async () => {
-    await fetch('http://localhost:3000/api/auth/logout', {
-      method: 'POST',
-      credentials: 'include',
-    });
+    await apiFetch('/api/auth/logout', { method: 'POST' });
     setLoggedIn(false);
     navigate('/login');
   };

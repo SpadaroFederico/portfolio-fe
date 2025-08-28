@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { apiFetch } from '../utils/apiFetch'; // importa apiFetch
 
 export default function ContactForm() {
   const [nome, setNome] = useState('');
@@ -13,7 +14,7 @@ export default function ContactForm() {
     setStatus('');
 
     try {
-      const res = await fetch('http://localhost:3000/api/contact', {
+      const res = await apiFetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, messaggio }),

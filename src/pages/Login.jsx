@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Login.css';
+import { apiFetch } from '../utils/apiFetch'; // importa apiFetch
 
 function Login() {
   const navigate = useNavigate();
@@ -12,11 +13,10 @@ function Login() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:3000/api/auth/login', {
+      const res = await apiFetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-        credentials: 'include' // IMPORTANTISSIMO: invia cookie
+        body: JSON.stringify(form)
       });
 
       const data = await res.json();

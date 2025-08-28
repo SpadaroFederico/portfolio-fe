@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import ProgettiList from '../components/admin/ProgettiList';
+import { apiFetch } from '../utils/apiFetch';
 
 export default function ProgettiPage() {
   const [progetti, setProgetti] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/progetti') // URL del tuo backend
-      .then(res => res.json())
-      .then(data => setProgetti(data))
-      .catch(err => console.error(err));
+    const fetchProgetti = async () => {
+      try {
+        const res = await apiFetch('/api/progetti');
+        const data = await res.json();
+        setProgetti(data);
+      } catch (err) {
+        console.error('Errore nel fetch dei progetti:', err);
+      }
+    };
+
+    fetchProgetti();
   }, []);
 
   const handleEdit = (p) => {
