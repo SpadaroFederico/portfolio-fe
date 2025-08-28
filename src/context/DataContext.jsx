@@ -29,44 +29,81 @@ export default function DataProvider({ children }) {
         const res = await apiFetch(endpoint, {
           method: 'POST',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(item)
+          body: JSON.stringify(item),
         });
-        if (!res?.ok) { const err = await res?.json(); alert(err?.message || 'Errore'); return false; }
+        if (!res?.ok) {
+          const err = await res?.json();
+          alert(err?.message || 'Errore');
+          return false;
+        }
         const data = await res.json();
         setState([...state, { ...item, id: data.id }]);
         return true;
-      } catch (error) { alert(error.message); return false; }
+      } catch (error) {
+        alert(error.message);
+        return false;
+      }
     },
     update: async (item) => {
       try {
         const res = await apiFetch(`${endpoint}/${item.id}`, {
           method: 'PUT',
           headers: { 'content-type': 'application/json' },
-          body: JSON.stringify(item)
+          body: JSON.stringify(item),
         });
-        if (!res?.ok) { const err = await res?.json(); alert(err?.message || 'Errore'); return false; }
+        if (!res?.ok) {
+          const err = await res?.json();
+          alert(err?.message || 'Errore');
+          return false;
+        }
         setState(state.map(s => s.id === item.id ? item : s));
         return true;
-      } catch (error) { alert(error.message); return false; }
+      } catch (error) {
+        alert(error.message);
+        return false;
+      }
     },
-    delete: async (item) => {
+    remove: async (item) => {
       try {
         const res = await apiFetch(`${endpoint}/${item.id}`, {
           method: 'DELETE',
-          headers: { 'content-type': 'application/json' }
+          headers: { 'content-type': 'application/json' },
         });
-        if (!res?.ok) { const err = await res?.json(); alert(err?.message || 'Errore'); return false; }
+        if (!res?.ok) {
+          const err = await res?.json();
+          alert(err?.message || 'Errore');
+          return false;
+        }
         setState(state.filter(s => s.id !== item.id));
         return true;
-      } catch (error) { alert(error.message); return false; }
-    }
+      } catch (error) {
+        alert(error.message);
+        return false;
+      }
+    },
   });
+
+  // Esplicitamente rinominiamo le funzioni CRUD
+  const progettiCrud = crud(progetti, setProgetti, '/api/progetti');
+  const certificazioniCrud = crud(certificazioni, setCertificazioni, '/api/certificazioni');
+  const esperienzeCrud = crud(esperienze, setEsperienze, '/api/esperienze');
 
   return (
     <DataContext.Provider value={{
-      progetti, ...crud(progetti, setProgetti, '/api/progetti'),
-      certificazioni, ...crud(certificazioni, setCertificazioni, '/api/certificazioni'),
-      esperienze, ...crud(esperienze, setEsperienze, '/api/esperienze')
+      progetti,
+      createProgetto: progettiCrud.create,
+      updateProgetto: progettiCrud.update,
+      deleteProgetto: progettiCrud.remove,
+
+      certificazioni,
+      createCertificazione: certificazioniCrud.create,
+      updateCertificazione: certificazioniCrud.update,
+      deleteCertificazione: certificazioniCrud.remove,
+
+      esperienze,
+      createEsperienza: esperienzeCrud.create,
+      updateEsperienza: esperienzeCrud.update,
+      deleteEsperienza: esperienzeCrud.remove,
     }}>
       {children}
     </DataContext.Provider>
