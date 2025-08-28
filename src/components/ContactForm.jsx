@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { apiFetch } from '../utils/apiFetch'; // importa apiFetch
+import { apiFetch } from '../utils/apiFetch';
 
 export default function ContactForm() {
   const [nome, setNome] = useState('');
@@ -20,19 +20,18 @@ export default function ContactForm() {
         body: JSON.stringify({ nome, email, messaggio }),
       });
 
-      const data = await res.json();
       if (res.ok) {
         setStatus('✅ Messaggio inviato con successo! Ti risponderò al più presto.');
         setNome(''); setEmail(''); setMessaggio('');
       } else {
-        setStatus('❌ ' + (data.msg || "Errore nell'invio"));
+        setStatus('❌ ' + (res.data?.msg || 'Errore nell\'invio'));
       }
     } catch (err) {
       console.error(err);
-      setStatus("❌ Errore di connessione al server");
+      setStatus('❌ Errore imprevisto');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
