@@ -10,17 +10,9 @@ function ProtectedRoute({ children }) {
     let mounted = true; // evita aggiornamenti su component unmounted
 
     const checkAuth = async () => {
-      try {
-        const res = await apiFetch('/api/auth/protected-check', { method: 'GET' });
-        if (!mounted) return;
-
-        setAuthenticated(res ? res.ok : false); // se res è null => false
-      } catch (err) {
-        if (!mounted) return;
-        setAuthenticated(false);
-      } finally {
-        if (mounted) setLoading(false);
-      }
+        const res = await apiFetch('/api/auth/protected-check');
+        setAuthenticated(res?.ok);
+        setLoading(false);
     };
 
     checkAuth();
