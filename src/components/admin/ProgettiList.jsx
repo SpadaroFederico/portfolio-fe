@@ -7,8 +7,8 @@ export default function ProgettiList({
   progetti = [],
   immaginiProgetti = {},
   isAdmin = false, // <-- reintrodotto come prop opzionale
-  onEdit={handleEditProgetto}, // <-- qui
-  onDelete={handleDeleteProgetto}
+  onEdit,
+  onDelete
 }) {
   const [expandedItems, setExpandedItems] = useState({});
 
