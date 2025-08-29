@@ -16,8 +16,9 @@ export default function ContactForm() {
     try {
       const res = await apiFetch('/api/contact', {
         method: 'POST',
+        headers: { 'Content-Type': 'application/json' }, // ✅ header corretto
         body: JSON.stringify({ nome, email, messaggio }),
-      }, false); // ❌ pubblico: non inviare cookie
+      }, false); // pubblico: senza cookie
 
       if (res.ok) {
         setStatus('✅ Messaggio inviato con successo!');
@@ -26,7 +27,7 @@ export default function ContactForm() {
         setStatus('❌ ' + (res.data?.msg || 'Errore nell\'invio'));
       }
     } catch (err) {
-      console.error(err);
+      console.error('Errore fetch:', err);
       setStatus('❌ Errore imprevisto');
     } finally {
       setLoading(false);
