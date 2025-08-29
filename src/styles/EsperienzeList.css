@@ -121,7 +121,7 @@
   max-width: 700px;
   margin: 3rem auto;
   padding: 2rem;
-  background: rgba(255,255,255,0.05);
+  background: linear-gradient(145deg,#140028d9,#000000b3);
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   color: #fff;
