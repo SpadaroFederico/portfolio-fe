@@ -14,14 +14,14 @@ export default function ContactForm() {
     setStatus('');
 
     try {
-      // includeCredentials = false perché il contact form è pubblico
-      const res = await apiFetch('/contact', {
+      // endpoint pubblico, quindi includeCredentials = false
+      const res = await apiFetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify({ nome, email, messaggio }),
       }, false);
 
       if (res.ok) {
-        setStatus('✅ Messaggio inviato con successo! Ti risponderò al più presto.');
+        setStatus('✅ Messaggio inviato con successo!');
         setNome(''); setEmail(''); setMessaggio('');
       } else {
         setStatus('❌ ' + (res.data?.msg || 'Errore nell\'invio'));
@@ -38,31 +38,13 @@ export default function ContactForm() {
     <div className="contact__form-box">
       <h2>Contattami</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Il tuo nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="La tua email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <textarea
-          placeholder="Il tuo messaggio"
-          value={messaggio}
-          onChange={(e) => setMessaggio(e.target.value)}
-          required
-        />
+        <input type="text" placeholder="Il tuo nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
+        <input type="email" placeholder="La tua email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        <textarea placeholder="Il tuo messaggio" value={messaggio} onChange={(e) => setMessaggio(e.target.value)} required />
         <button type="submit" disabled={loading}>
           {loading ? '⏳ Inviando...' : 'Invia'}
         </button>
       </form>
-
       {status && (
         <p className={`contact__status ${status.includes('✅') ? 'success' : 'error'}`}>
           {status}

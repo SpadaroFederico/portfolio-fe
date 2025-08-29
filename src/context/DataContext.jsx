@@ -11,9 +11,14 @@ export default function DataProvider({ children }) {
   const fetchData = async (endpoint, setState) => {
     try {
       const res = await apiFetch(endpoint);
-      if (!res) return; // null se refresh token fallito
-      const data = await res.json();
-      setState(data);
+      if (res.ok) {
+        setState(res.data); // ✅ usa res.data direttamente
+      } else if (res.status === 401) {
+        console.log(`Non autorizzato per ${endpoint}`);
+        setState([]);
+      } else {
+        console.error(`Errore nel fetch di ${endpoint}:`, res.data?.msg);
+      }
     } catch (err) {
       console.error(`Errore nel fetch di ${endpoint}:`, err);
     }
@@ -31,13 +36,11 @@ export default function DataProvider({ children }) {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(item),
         });
-        if (!res?.ok) {
-          const err = await res?.json();
-          alert(err?.message || 'Errore');
+        if (!res.ok) {
+          alert(res.data?.msg || 'Errore');
           return false;
         }
-        const data = await res.json();
-        setState([...state, { ...item, id: data.id }]);
+        setState([...state, { ...item, id: res.data.id }]);
         return true;
       } catch (error) {
         alert(error.message);
@@ -51,9 +54,8 @@ export default function DataProvider({ children }) {
           headers: { 'content-type': 'application/json' },
           body: JSON.stringify(item),
         });
-        if (!res?.ok) {
-          const err = await res?.json();
-          alert(err?.message || 'Errore');
+        if (!res.ok) {
+          alert(res.data?.msg || 'Errore');
           return false;
         }
         setState(state.map(s => s.id === item.id ? item : s));
@@ -69,9 +71,8 @@ export default function DataProvider({ children }) {
           method: 'DELETE',
           headers: { 'content-type': 'application/json' },
         });
-        if (!res?.ok) {
-          const err = await res?.json();
-          alert(err?.message || 'Errore');
+        if (!res.ok) {
+          alert(res.data?.msg || 'Errore');
           return false;
         }
         setState(state.filter(s => s.id !== item.id));
@@ -83,7 +84,6 @@ export default function DataProvider({ children }) {
     },
   });
 
-  // Esplicitamente rinominiamo le funzioni CRUD
   const progettiCrud = crud(progetti, setProgetti, '/api/progetti');
   const certificazioniCrud = crud(certificazioni, setCertificazioni, '/api/certificazioni');
   const esperienzeCrud = crud(esperienze, setEsperienze, '/api/esperienze');

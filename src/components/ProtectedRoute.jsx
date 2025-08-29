@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { apiFetch } from "../utils/apiFetch";
 
-function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -10,8 +10,7 @@ function ProtectedRoute({ children }) {
     let mounted = true;
 
     const checkAuth = async () => {
-      const res = await apiFetch('/auth/protected-check');
-
+      const res = await apiFetch('/api/auth/protected-check');
       if (!mounted) return;
 
       if (res.ok) {
@@ -24,12 +23,9 @@ function ProtectedRoute({ children }) {
     };
 
     checkAuth();
-
-    return () => { mounted = false; }
+    return () => { mounted = false };
   }, []);
 
   if (loading) return <p>Caricamento...</p>;
   return authenticated ? children : <Navigate to="/login" replace />;
 }
-
-export default ProtectedRoute;
