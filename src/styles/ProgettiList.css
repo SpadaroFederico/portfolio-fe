@@ -1,12 +1,13 @@
 /* Admin - lista progetti */
 .admin-progetti {
-  max-width: 700px;
+  max-width: 95%; /* usa quasi tutta la viewport */
   margin: 5rem auto;
-  padding: 2rem;
+  padding: 1rem;
   background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   color: #fff;
+  overflow-x: hidden; /* evita overflow orizzontale della pagina */
 }
 
 .admin-progetti h2 {
@@ -44,14 +45,20 @@
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  gap: 1.5rem;
-  padding-bottom: 1rem;
-  justify-content: flex-start; /* non centrare forzatamente */
+  gap: 1rem;
+  padding: 1rem 0;
+  -webkit-overflow-scrolling: touch; /* smooth scroll mobile */
 }
 
 .admin-progetti .carousel-item {
-  flex: 0 0 250px; /* riduci larghezza per schermi piccoli */
+  flex: 0 0 auto;
+  min-width: 220px; /* adattabile */
+  max-width: 280px;
   scroll-snap-align: start;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .admin-progetti .carousel-item:hover {

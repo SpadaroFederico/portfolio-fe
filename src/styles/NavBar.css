@@ -1,6 +1,6 @@
 /* Navbar principale - desktop */
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 10px;
   left: 0;
   right: 0;
