@@ -1,4 +1,4 @@
-// utils/apiFetch.js (FE sicuro con cookie HttpOnly)
+// utils/apiFetch.js (FE)
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 /**
@@ -22,7 +22,7 @@ export const apiFetch = async (url, options = {}, includeCredentials = true) => 
     let data;
     try { data = await res.json(); } catch { data = null; }
 
-    // Non tentare refresh lato FE: 401 → componente decide cosa fare
+    // Non tentare refresh automatico lato FE: 401 → componente decide cosa fare
     return { ok: res.ok, status: res.status, data };
   } catch (err) {
     console.error('Errore in apiFetch FE:', err);
