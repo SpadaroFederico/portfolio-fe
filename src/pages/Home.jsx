@@ -5,6 +5,8 @@ import ContactForm from '../components/ContactForm';
 import CertificazioniList from '../components/admin/CertificazioniList';
 import EsperienzeList from '../components/admin/EsperienzeList';
 import { FaGithub, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import '../../src/index.css';
+<div className="" />
 
 const Home = () => {
   return (

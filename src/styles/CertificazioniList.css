@@ -1,7 +1,7 @@
 .certificazioni-page {
-  max-width: 1000px;
+  width: 104%;
   margin: 5rem auto;
-  padding: 2rem;
+  padding: 0 1rem;
   background: radial-gradient(circle at top, rgba(25,0,50,0.9) 0%, rgba(0,0,0,0.85) 100%);
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
@@ -240,6 +240,10 @@
   .cert-card {
     max-width: 100%;
     padding: 1rem;
+  }
+
+  .certificazioni-page{
+    padding: 0 1.5rem;
   }
 
   .certificazioni-page h2 {
