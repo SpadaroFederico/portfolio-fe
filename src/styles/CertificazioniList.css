@@ -213,3 +213,34 @@
 .admin-certificazioni button:active {
   transform: scale(0.97);
 }
+
+/* ------------------------------
+   Responsive: Certificazioni
+--------------------------------*/
+@media (max-width: 450px) {
+  .certificazioni-list {
+    grid-template-columns: 1fr; /* 1 card per riga */
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .cert-card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .certificazioni-page h2 {
+    font-size: 1.6rem;
+  }
+
+  /* Admin certificazioni */
+  .admin-certificazioni {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 2rem 0;
+  }
+
+  .admin-certificazioni h2 {
+    font-size: 1.4rem;
+  }
+}

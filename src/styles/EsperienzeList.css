@@ -176,3 +176,34 @@
 .admin-actions button:active {
   transform: scale(0.97);
 }
+
+/* ------------------------------
+   Responsive: Esperienze
+--------------------------------*/
+@media (max-width: 450px) {
+  .esperienze-list {
+    grid-template-columns: 1fr; /* 1 card per riga */
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+
+  .esperienza-card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .esperienze-page h2 {
+    font-size: 1.6rem;
+  }
+
+  /* Admin esperienze */
+  .admin-esperienze {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 2rem 0;
+  }
+
+  .admin-esperienze h2 {
+    font-size: 1.4rem;
+  }
+}

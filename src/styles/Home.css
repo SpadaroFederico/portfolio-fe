@@ -213,3 +213,68 @@ html {
 .contact__form-box button:active {
   transform: scale(0.98);
 }
+
+/* ------------------------------
+   Responsive: Home section
+--------------------------------*/
+@media (max-width: 450px) {
+
+  /* Hero section */
+  .home__hero {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .home__intro h1 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .home__intro h2 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .home__intro p {
+    font-size: 1rem;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* About section */
+  .home__about {
+    padding: 1.5rem;
+    margin: 2rem 1rem;
+  }
+
+  .home__about h2 {
+    font-size: 1.5rem;
+  }
+
+  .home__about p {
+    font-size: 1rem;
+  }
+
+  /* Contact section */
+  .home__contact {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  .contact__socials {
+    padding-left: 0;
+  }
+
+  .contact__socials li a {
+    gap: 1rem;
+    padding-left: 0;
+    font-size: 1.2rem;
+  }
+
+  .contact__form-box {
+    max-width: 100%;
+    padding: 1.5rem;
+  }
+}
