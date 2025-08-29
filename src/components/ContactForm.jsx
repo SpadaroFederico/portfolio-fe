@@ -14,11 +14,11 @@ export default function ContactForm() {
     setStatus('');
 
     try {
-      const res = await apiFetch('/api/contact', {
+      // includeCredentials = false perché il contact form è pubblico
+      const res = await apiFetch('/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ nome, email, messaggio }),
-      });
+      }, false);
 
       if (res.ok) {
         setStatus('✅ Messaggio inviato con successo! Ti risponderò al più presto.');

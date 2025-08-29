@@ -25,7 +25,7 @@ function ProtectedRoute({ children }) {
 
     checkAuth();
 
-    return () => { mounted = false };
+    return () => { mounted = false; }
   }, []);
 
   if (loading) return <p>Caricamento...</p>;
