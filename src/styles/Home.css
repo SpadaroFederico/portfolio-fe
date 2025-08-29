@@ -278,3 +278,11 @@ html {
     padding: 1.5rem;
   }
 }
+
+@media (max-width: 412px) {
+  section > .certificazioni-page,
+  section > .esperienze-page {
+    margin: 2rem 1rem;
+    padding: 1rem;
+  }
+}
