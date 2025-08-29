@@ -13,10 +13,10 @@
   text-align: center;
   font-size: 1.8rem;
   margin-bottom: 2rem;
-  background: linear-gradient(90deg, #ff00ff, #00ffff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: #fff; /* gradient rimosso */
+  background: none;
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: unset;
 }
 
 .admin-progetti ul {
@@ -24,10 +24,10 @@
   padding: 0;
   margin: 0;
   display: flex;
-  flex-direction: row; /* da column a row */
-  flex-wrap: wrap;     /* così vanno a capo se non c’è spazio */
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 1.5rem;
-  justify-content: flex-start; /* o space-between / center */
+  justify-content: flex-start;
   padding-bottom: 1rem;
 }
 
@@ -36,7 +36,7 @@
   border-radius: 10px;
   padding: 1.2rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  flex: 0 0 800px; /* larghezza fissa per ogni card */
+  flex: 0 0 300px; /* adattamento per mobile */
   scroll-snap-align: start;
 }
 
@@ -62,11 +62,12 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-
 .admin-progetti img {
   display: block;
   margin: 0.5rem auto;
   border-radius: 6px;
+  max-width: 100%;
+  height: auto;
 }
 
 .admin-progetti h3 {
@@ -146,7 +147,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* Mostra solo 3 righe */
+  -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
   line-height: 1.3;
@@ -159,7 +160,6 @@
   line-clamp: unset;
   overflow: visible;
 }
-
 
 /* Leggi tutto */
 .read-more-btn {
@@ -180,8 +180,8 @@
 .timeline-element a {
   font-size: 0.85rem;
   color: #00ffff;
-  margin: 0.3rem 0; /* margine verticale */
-  display: block;   /* forzato a blocco per stare uno sotto l'altro */
+  margin: 0.3rem 0;
+  display: block;
 }
 
 .timeline-element a:hover {
@@ -202,13 +202,13 @@
 }
 
 .public-progetti {
-  position: relative; /* necessario per le immagini assolute */
+  position: relative;
 }
 
 /* Immagini extra fuori dalla card */
 .project-extra-outside {
   position: absolute;
-  top: 0; /* allinea verticalmente con la card */
+  top: 0;
   max-height: 260px;
   width: auto;
   border-radius: 6px;
@@ -217,7 +217,7 @@
 }
 
 .project-extra-outside.left {
-  left: 220%; /* distanza dalla timeline */
+  left: 220%;
   top: 25%;
 }
 
@@ -226,18 +226,16 @@
   top: 25%;
 }
 
-/* Puoi aggiungere un effetto hover leggero */
 .project-extra-outside:hover {
   transform: scale(1.05);
 }
 
 /* Media query tablet/small desktop */
 @media (min-width: 770px) and (max-width: 1169px) {
-  /* Tutte le immagini extra vanno a destra */
   .project-extra-outside.left,
   .project-extra-outside.right {
     left: calc(100% + 10px);
-    right: auto; /* resetta eventuale posizionamento a destra */
+    right: auto;
     max-height: 200px;
   }
 }
@@ -245,7 +243,7 @@
 /* Tablet stretto / mobile */
 @media (max-width: 769px) {
   .project-extra-outside {
-    display: none; /* ok nasconderle qui */
+    display: none;
   }
 
   .timeline-element .vertical-timeline-element-content {
@@ -257,5 +255,36 @@
   .project-gif {
     width: 100%;
     max-height: 180px;
+  }
+}
+
+/* Schermi extra piccoli fino a 412px */
+@media (max-width: 412px) {
+  .admin-progetti {
+    margin: 2rem 0.5rem;
+    padding: 0.8rem;
+  }
+
+  .admin-progetti h2 {
+    font-size: 1.3rem;
+  }
+
+  .carousel-item {
+    flex: 0 0 90%;
+    padding: 0.8rem;
+  }
+
+  .project-gif {
+    max-height: 150px;
+  }
+
+  .admin-progetti h3 {
+    font-size: 1.1rem;
+  }
+
+  .admin-progetti p, 
+  .admin-progetti a, 
+  .admin-progetti button {
+    font-size: 0.8rem;
   }
 }

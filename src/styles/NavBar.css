@@ -6,7 +6,7 @@
   transform: translateX(-50%);
   width: 30%;           
   max-width: 1200px;
-  min-width: 320px;     /* assicura che non si restringa troppo */
+  min-width: 320px;     
   height: 80px;
   display: flex;
   justify-content: space-evenly;
@@ -23,7 +23,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 35px; /* spaziatura tra le icone leggermente maggiore */
+  gap: 35px;
 }
 
 .navbar__nav li {
@@ -46,12 +46,12 @@
   padding: 8px 12px;
   transition: color 0.3s ease, transform 0.3s ease;
   position: relative;
-  white-space: nowrap; /* evita salto di riga */
+  white-space: nowrap;
 }
 
 .navbar__link:hover {
   color: #ffffff;
-  transform: translateY(-3px); /* leggero sollevamento */
+  transform: translateY(-3px);
 }
 
 .navbar__icon {
@@ -63,26 +63,25 @@
   transform: scale(1.2);
 }
 
-/* Linea gradient sotto le icone, contenuta */
+/* Linea gradient sotto le icone */
 .navbar__link::after {
   content: '';
   position: absolute;
-  bottom: 4px; /* rimane dentro navbar */
+  bottom: 4px;
   left: 20%;
-  width: 60%; /* non occupa tutta la larghezza */
+  width: 60%;
   height: 4px;
   border-radius: 2px;
   background: linear-gradient(90deg, #ff00ff, #00ffff);
-  translate: Y(-6px); /* leggero distacco dall'icona */
+  translate: Y(-6px);
   transition: opacity 0.3s ease;
-  opacity: 0; /* visibile solo al hover */
+  opacity: 0;
 }
 
 .navbar__link:hover::after {
   opacity: 1;
 }
 
-/* Toggle lingua vicino ai link e senza ridimensionamento */
 .navbar__toggle-lingua {
   background: transparent;
   border: 2px solid #ffffff;
@@ -93,7 +92,7 @@
   padding: 6px 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-left: 10px; /* più vicino ai link */
+  margin-left: 10px;
 }
 
 .navbar__toggle-lingua:hover {
@@ -105,20 +104,20 @@
 /* Schermi medi: tablet e piccoli desktop */
 @media (max-width: 1169px) {
   .navbar {
-    width: 40%; /* leggermente più larga per contenuti */
+    width: 40%;
   }
 }
 
 /* Schermi piccoli: smartphone */
 @media (max-width: 768px) {
   .navbar {
-    width: 60%; /* non pieno schermo ma visibile */
+    width: 60%;
     padding: 0 10px;
-    height: 70px; /* leggermente più basso */
+    height: 70px;
   }
 
   .navbar__nav {
-    gap: 20px; /* riduci lo spazio tra icone */
+    gap: 20px;
   }
 
   .navbar__link {
@@ -128,5 +127,40 @@
 
   .navbar__icon {
     font-size: 1.4rem;
+  }
+}
+
+/* Schermi extra piccoli fino a 412px */
+@media (max-width: 412px) {
+  .navbar {
+    width: 90%; /* quasi full-width */
+    padding: 0 8px;
+    height: 65px;
+  }
+
+  .navbar__nav {
+    flex-wrap: wrap; /* va a capo se necessario */
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .navbar__link {
+    font-size: 0.9rem;
+    padding: 4px 8px;
+    gap: 4px;
+  }
+
+  .navbar__icon {
+    font-size: 1.2rem;
+  }
+
+  .navbar__toggle-lingua {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+  }
+
+  .navbar__link.navbar__button {
+    font-size: 0.85rem;
+    padding: 4px 8px;
   }
 }
