@@ -5,14 +5,21 @@ import { apiFetch } from "../utils/apiFetch";
 function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
+    const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
 
   useEffect(() => {
     let mounted = true; // evita aggiornamenti su component unmounted
 
     const checkAuth = async () => {
-        const res = await apiFetch('/api/auth/protected-check');
-        setAuthenticated(res?.ok);
-        setLoading(false);
+        const res = await fetch(`${BASE_URL}/auth/protected-check`, { credentials: 'include' });
+        if (res.status === 401 || res.status === 403) {
+            // Non autenticato, ma non è un errore bloccante
+            return { authenticated: false };
+        }
+        if (!res.ok) {
+            throw new Error('Errore nel controllo autenticazione');
+        }
+        return await res.json();
     };
 
     checkAuth();
