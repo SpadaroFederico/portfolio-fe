@@ -19,6 +19,20 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* Carosello */
+.certificazioni-carousel {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1rem;
+  scrollbar-width: none;
+}
+.certificazioni-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+
 .certificazioni-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -41,13 +55,12 @@
   align-items: center;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  padding: 1.4rem;
+  padding: 1.2rem;
+  height: 85%; /* ridotta di ~15% */
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
   backdrop-filter: blur(6px);
-
-  /* bordo gradient leggero */
   border: 2px solid transparent;
   border-image: linear-gradient(135deg, #ff00ff, #00ffff) 1;
 }
@@ -62,14 +75,14 @@
   width: auto;          /* mantiene la larghezza naturale */
   max-width: 100%;       /* limita la dimensione massima */
   height: auto;         /* mantiene proporzioni */
-  max-height: 200px;    /* evita che l’immagine diventi troppo alta */
+  max-height: 180px;    /* evita che l’immagine diventi troppo alta */
 }
 
 .cert-card .img-wrapper {
   display: flex;
   align-items: center;  /* centra verticalmente l’immagine */
   justify-content: center; /* centra orizzontalmente */
-  height: 200px;        /* altezza uniforme del contenitore */
+  height: 180;        /* altezza uniforme del contenitore */
   margin-bottom: 1rem;
 }
 
@@ -242,5 +255,12 @@
 
   .admin-certificazioni h2 {
     font-size: 1.4rem;
+  }
+
+  .certificazioni-carousel {
+    gap: 1rem;
+  }
+  .cert-card-link {
+    flex: 0 0 85%;
   }
 }

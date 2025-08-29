@@ -2,13 +2,15 @@ import { useContext, useState } from 'react';
 import { DataContext } from '../../context/DataContext';  
 import '../../styles/CertificazioniList.css';
 
-export default function CertificazioniList({ isAdmin = false, onEdit, onDelete }) {
-  const { certificazioni } = useContext(DataContext);
-  const [expandedId, setExpandedId] = useState(null);
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
 
+export default function CertificazioniList({ certificazioni }) {
   if (!certificazioni || certificazioni.length === 0) {
     return (
-      <div className={isAdmin ? 'admin-certificazioni' : 'certificazioni-page'}>
+      <div className="certificazioni-page">
         <h2>Certificazioni</h2>
         <p>Nessuna certificazione disponibile al momento.</p>
       </div>
@@ -16,47 +18,38 @@ export default function CertificazioniList({ isAdmin = false, onEdit, onDelete }
   }
 
   return (
-    <div className={isAdmin ? 'admin-certificazioni' : 'certificazioni-page'}>
+    <div className="certificazioni-page">
       <h2>Certificazioni</h2>
-      <ul className={isAdmin ? '' : 'certificazioni-list'}>
-        {certificazioni.map(cert => {
-          const isExpanded = expandedId === cert.id;
-
-          // Wrapper per rendere cliccabile tutta la card solo in modalità pubblica
-          const CardWrapper = !isAdmin && cert.img ? 'a' : 'div';
-          const wrapperProps = !isAdmin && cert.img ? { href: cert.img, target: "_blank", rel: "noopener noreferrer" } : {};
-
-          return (
-            <li key={cert.id} className={isAdmin ? '' : 'cert-card'}>
-              <CardWrapper {...wrapperProps} className={!isAdmin ? 'cert-card-link' : ''}>
-                <div className="img-wrapper">
-                  {cert.img && <img src={cert.img} alt={`Certificato ${cert.titolo}`} />}
-                </div>
-                </CardWrapper>
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={20}
+        pagination={{ clickable: true }}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          768: { slidesPerView: 2 },
+        }}
+      >
+        {certificazioni.map(cert => (
+          <SwiperSlide key={cert.id}>
+            <div className="carousel-card">
+              <div className="card-img">
+                {cert.img && <img src={cert.img} alt={cert.titolo} />}
+              </div>
+              <div className="card-content">
                 <h3>{cert.titolo}</h3>
                 <p><span>Ente:</span> {cert.ente}</p>
-                <p><span>Data:</span> {new Date(cert.data_conseguimento).toLocaleDateString('it-IT', { year: 'numeric', month: 'long' })}</p>
-                <div className={`descrizione ${isExpanded ? 'expanded' : ''}`}>
-                  {cert.descrizione}
-                </div>
-
-                {!isAdmin && cert.descrizione?.length > 150 && (
-                  <button onClick={() => setExpandedId(isExpanded ? null : cert.id)}>
-                    {isExpanded ? 'Mostra meno' : 'Leggi di più'}
-                  </button>
-                )}
-
-                {isAdmin && (
-                  <div className="admin-actions">
-                    <button onClick={() => onEdit(cert)}>Modifica</button>
-                    <button onClick={() => onDelete(cert)}>Elimina</button>
-                  </div>
-                )}
-              
-            </li>
-          );
-        })}
-      </ul>
+                <p><span>Data:</span> {new Date(cert.data_conseguimento).toLocaleDateString('it-IT', { month: 'short', year: 'numeric' })}</p>
+                <p className="descrizione">
+                  {cert.descrizione?.length > 120
+                    ? cert.descrizione.slice(0, 120) + "..."
+                    : cert.descrizione}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
+
