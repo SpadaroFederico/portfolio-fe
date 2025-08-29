@@ -14,11 +14,10 @@ export default function ContactForm() {
     setStatus('');
 
     try {
-      // endpoint pubblico, quindi includeCredentials = false
       const res = await apiFetch('/api/contact', {
         method: 'POST',
         body: JSON.stringify({ nome, email, messaggio }),
-      }, false);
+      }, false); // ❌ pubblico: non inviare cookie
 
       if (res.ok) {
         setStatus('✅ Messaggio inviato con successo!');

@@ -19,13 +19,12 @@ function Login() {
         body: JSON.stringify(form)
       });
 
-      const data = await res.json();
-
+      // Non usare .json()
       if (res.ok) {
         alert('Login riuscito!');
         navigate('/admin');
       } else {
-        setError(data.message || 'Login fallito');
+        setError(res.data?.message || res.data?.msg || 'Login fallito');
       }
     } catch (err) {
       console.error('Errore di rete:', err);

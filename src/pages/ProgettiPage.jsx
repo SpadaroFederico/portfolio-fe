@@ -7,12 +7,11 @@ export default function ProgettiPage() {
 
   useEffect(() => {
     const fetchProgetti = async () => {
-      try {
-        const res = await apiFetch('/api/progetti');
-        const data = await res.json();
-        setProgetti(data);
-      } catch (err) {
-        console.error('Errore nel fetch dei progetti:', err);
+      const res = await apiFetch('/api/progetti');
+      if (res.ok) {
+        setProgetti(res.data);
+      } else {
+        console.error('Errore nel fetch dei progetti:', res.data?.msg || res.data?.message);
       }
     };
 

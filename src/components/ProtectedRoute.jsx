@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { apiFetch } from "../utils/apiFetch";
 
-export default function ProtectedRoute({ children }) {
+function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [authenticated, setAuthenticated] = useState(false);
 
@@ -10,22 +10,23 @@ export default function ProtectedRoute({ children }) {
     let mounted = true;
 
     const checkAuth = async () => {
-      const res = await apiFetch('/api/auth/protected-check');
+      const res = await apiFetch('/api/auth/protected-check', {}, true);
+
       if (!mounted) return;
 
-      if (res.ok) {
-        setAuthenticated(true);
-      } else {
-        setAuthenticated(false);
-      }
+      if (res.ok) setAuthenticated(true);
+      else setAuthenticated(false);
 
       setLoading(false);
     };
 
     checkAuth();
+
     return () => { mounted = false };
   }, []);
 
   if (loading) return <p>Caricamento...</p>;
   return authenticated ? children : <Navigate to="/login" replace />;
 }
+
+export default ProtectedRoute;
