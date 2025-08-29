@@ -13,21 +13,33 @@ export default function ContactForm() {
     setLoading(true);
     setStatus('');
 
+    console.log('--- SUBMIT FORM ---');
+    console.log({ nome, email, messaggio });
+
     try {
-      const res = await apiFetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }, // ✅ header corretto
-        body: JSON.stringify({ nome, email, messaggio }),
-      }, false); // pubblico: senza cookie
+      const res = await apiFetch(
+        '/api/contact',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }, // fondamentale
+          body: JSON.stringify({ nome, email, messaggio }),
+        },
+        false // non inviare cookie
+      );
+
+      console.log('--- RISPOSTA SERVER ---');
+      console.log(res);
 
       if (res.ok) {
         setStatus('✅ Messaggio inviato con successo!');
         setNome(''); setEmail(''); setMessaggio('');
       } else {
+        console.log('--- ERRORE SERVER ---');
+        console.log(res.data);
         setStatus('❌ ' + (res.data?.msg || 'Errore nell\'invio'));
       }
     } catch (err) {
-      console.error('Errore fetch:', err);
+      console.error('❌ ERRORE FETCH:', err);
       setStatus('❌ Errore imprevisto');
     } finally {
       setLoading(false);
@@ -38,9 +50,26 @@ export default function ContactForm() {
     <div className="contact__form-box">
       <h2>Contattami</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="Il tuo nome" value={nome} onChange={(e) => setNome(e.target.value)} required />
-        <input type="email" placeholder="La tua email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        <textarea placeholder="Il tuo messaggio" value={messaggio} onChange={(e) => setMessaggio(e.target.value)} required />
+        <input
+          type="text"
+          placeholder="Il tuo nome"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
+          required
+        />
+        <input
+          type="email"
+          placeholder="La tua email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Il tuo messaggio"
+          value={messaggio}
+          onChange={(e) => setMessaggio(e.target.value)}
+          required
+        />
         <button type="submit" disabled={loading}>
           {loading ? '⏳ Inviando...' : 'Invia'}
         </button>
