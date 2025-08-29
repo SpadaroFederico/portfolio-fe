@@ -1,8 +1,8 @@
-// src/utils/apiFetch.js
+// src/utils/apiFetch.js (FE)
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 /**
- * Fetch sicuro lato FE con cookie HttpOnly
+ * Fetch lato FE con gestione cookie HttpOnly
  * @param {string} url - endpoint relativo
  * @param {object} options - fetch options
  * @param {boolean} includeCredentials - invio cookie (default true)
@@ -14,7 +14,7 @@ export const apiFetch = async (url, options = {}, includeCredentials = true) => 
     const res = await fetch(`${BASE_URL}${url}`, {
       ...options,
       headers,
-      credentials: includeCredentials ? 'include' : 'omit',
+      credentials: includeCredentials ? 'include' : 'omit', // ❌ per form pubblico
     });
 
     let data;
