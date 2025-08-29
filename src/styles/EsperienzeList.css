@@ -267,10 +267,14 @@
     font-size: 1.4rem;
   }
 
-  .esperienze-carousel {
-    gap: 1rem;
+  .esperienze-carousel{
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-  .esperienza-card-link {
-    flex: 0 0 85%;
+
+  .esperienza-card-link{
+    flex: 0 0 85%; /* larghezza minima della slide */
   }
 }

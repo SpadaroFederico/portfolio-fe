@@ -263,4 +263,16 @@
   .cert-card-link {
     flex: 0 0 85%;
   }
+
+  .certificazioni-carousel {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cert-card-link {
+    flex: 0 0 85%; /* larghezza minima della slide */
+  }
+
 }
