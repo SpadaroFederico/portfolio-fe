@@ -46,15 +46,12 @@
   scroll-snap-type: x mandatory;
   gap: 1.5rem;
   padding-bottom: 1rem;
+  justify-content: flex-start; /* non centrare forzatamente */
 }
 
 .admin-progetti .carousel-item {
-  flex: 0 0 300px;
+  flex: 0 0 250px; /* riduci larghezza per schermi piccoli */
   scroll-snap-align: start;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 1.2rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .admin-progetti .carousel-item:hover {
@@ -286,5 +283,13 @@
   .admin-progetti a, 
   .admin-progetti button {
     font-size: 0.8rem;
+  }
+  .admin-progetti .carousel-container {
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .admin-progetti .carousel-item {
+    flex: 0 0 200px; /* più stretto ma rimane orizzontale */
   }
 }

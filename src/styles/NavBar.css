@@ -1,15 +1,15 @@
 /* Navbar principale - desktop */
 .navbar {
-  position: fixed;      
-  top: 10px;             
-  left: 50%;            
-  transform: translateX(-50%);
-  width: 30%;           
+  position: fixed;
+  top: 10px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;         /* centro reale */
   max-width: 1200px;
-  min-width: 320px;     
+  min-width: 320px;
   height: 80px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center; /* centra i link */
   align-items: center;
   padding: 0 20px;
   border-radius: 50px;
