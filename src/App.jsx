@@ -8,8 +8,6 @@ import Admin from './pages/Admin.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import ParticlesBackground from "./components/ParticlesBackground";
 import ProgettiPage from './pages/ProgettiPage.jsx';
-import CertificatiPage from './pages/CertificatiPage.jsx';
-import EsperienzePage from './pages/EsperienzePage.jsx';
 import './index.css';
 
 function App() {
