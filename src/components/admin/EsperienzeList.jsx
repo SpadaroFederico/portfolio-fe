@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { DataContext } from '../../context/DataContext';
 import '../../styles/EsperienzeList.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,6 +7,14 @@ import 'swiper/css';
 export default function EsperienzeList({ isAdmin = false, onEdit, onDelete }) {
   const { esperienze } = useContext(DataContext);
   const [expandedId, setExpandedId] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 450);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   if (!esperienze || esperienze.length === 0) {
     return (
@@ -18,7 +26,7 @@ export default function EsperienzeList({ isAdmin = false, onEdit, onDelete }) {
   }
 
   return (
-    <div className={isAdmin ? 'admin-esperienze' : 'esperienze-page'}>
+    <div className={isAdmin ? 'admin-esperienze' : 'esperienze-page'} style={{ width: isMobile ? '95%' : '100%' }}>
       <h2>Esperienze</h2>
 
       {isAdmin ? (
@@ -48,13 +56,13 @@ export default function EsperienzeList({ isAdmin = false, onEdit, onDelete }) {
         <Swiper
           className="esperienze-carousel"
           spaceBetween={16}
-          slidesPerView={'auto'}
+          slidesPerView={isMobile ? 'auto' : 1.2}
         >
           {esperienze.map(exp => {
             const isExpanded = expandedId === exp.id;
             return (
-              <SwiperSlide key={exp.id} className="esperienza-card-link">
-                <div className="esperienza-card">
+              <SwiperSlide key={exp.id} className="esperienza-card-link" style={{ flex: '0 0 85%', minWidth: '280px' }}>
+                <div className="esperienza-card" style={{ height: 'auto' }}>
                   <h3>{exp.titolo}</h3>
                   <p><span>Azienda:</span> {exp.azienda}</p>
                   <p>
@@ -67,7 +75,9 @@ export default function EsperienzeList({ isAdmin = false, onEdit, onDelete }) {
                       <img src={exp.img} alt={`Esperienza presso ${exp.azienda}`} className="img-wrapper" />
                     </a>
                   )}
-                  <div className={`descrizione ${isExpanded ? 'expanded' : ''}`}>{exp.descrizione}</div>
+                  <div className={`descrizione ${isExpanded ? 'expanded' : ''}`}>
+                    {exp.descrizione}
+                  </div>
                   {exp.descrizione?.length > 150 && (
                     <button onClick={() => setExpandedId(isExpanded ? null : exp.id)}>
                       {isExpanded ? 'Mostra meno' : 'Leggi di più'}
