@@ -59,7 +59,7 @@ export default function CertificazioniList({ isAdmin = false, onEdit, onDelete }
             const CardWrapper = cert.img ? 'a' : 'div';
             const wrapperProps = cert.img ? { href: cert.img, target: "_blank", rel: "noopener noreferrer" } : {};
             return (
-              <SwiperSlide key={cert.id} className="cert-card-link" style={{ flex: '0 0 85%', minWidth: '280px' }}>
+              <SwiperSlide key={cert.id} className="cert-card-link" style={{ flex: '0 0 85%', minWidth: '100%' }}>
                 <div className="cert-card" style={{ height: 'auto' }}>
                   <CardWrapper {...wrapperProps} className="img-wrapper">
                     {cert.img && <img src={cert.img} alt={`Certificato ${cert.titolo}`} />}

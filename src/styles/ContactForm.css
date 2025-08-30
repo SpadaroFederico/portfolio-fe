@@ -1,8 +1,7 @@
 /* Form Box */
 .contact__form-box {
   flex: 1;
-  min-width: 300px;
-  max-width: 350px; /* stessa larghezza compatta del login */
+
   margin: 0 auto;
   padding: 2rem;
   background: linear-gradient(145deg, rgba(20,0,40,0.9), rgba(0,0,0,0.85));
@@ -86,3 +85,4 @@ button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
+

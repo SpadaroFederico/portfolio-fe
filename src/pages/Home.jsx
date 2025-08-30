@@ -34,7 +34,7 @@ const Home = () => {
       <section>
         <CertificazioniList isAdmin={false} />
       </section>
-
+      
       {/* Sezione esperienze */}
       <section>
         <EsperienzeList isAdmin={false} />
@@ -44,13 +44,7 @@ const Home = () => {
       <section id="about" className="home__about">
         <h2>Chi sono</h2>
         <p>
-          La tecnologia è sempre stata una mia passione, ma è durante gli studi in elettronica alle superiori che ho scoperto il mio amore per la programmazione. Amo trovare soluzioni diverse a uno stesso problema e superare sfide lungo il percorso.
-        </p>
-        <p>
-          Dopo il diploma, ho maturato esperienza nel mondo del lavoro come fuori sede, imparando a gestire responsabilità e risorse. Questo periodo mi ha permesso di consolidare competenze e disciplina, preparandomi al passo successivo.
-        </p>
-        <p>
-          La mia vera passione però era il coding. Ho quindi intrapreso un percorso formativo per diventare sviluppatore web full-stack, e oggi continuo a crescere, esplorando nuove tecnologie e linguaggi per realizzare progetti innovativi e performanti.
+          La tecnologia mi ha sempre affascinato, ma è stato durante gli studi in elettronica alle superiori che ho scoperto la mia vera passione: la programmazione. Amo affrontare sfide, trovare soluzioni creative e trasformare idee in progetti concreti. Dopo il diploma ho accumulato esperienza lavorativa come fuori sede, imparando a gestire responsabilità e risorse. Oggi continuo a crescere come sviluppatore web full-stack, esplorando nuove tecnologie e realizzando applicazioni eleganti, performanti e innovative.
         </p>
       </section>
 

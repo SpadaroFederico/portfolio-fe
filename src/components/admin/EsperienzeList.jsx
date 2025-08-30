@@ -61,7 +61,7 @@ export default function EsperienzeList({ isAdmin = false, onEdit, onDelete }) {
           {esperienze.map(exp => {
             const isExpanded = expandedId === exp.id;
             return (
-              <SwiperSlide key={exp.id} className="esperienza-card-link" style={{ flex: '0 0 85%', minWidth: '280px' }}>
+              <SwiperSlide key={exp.id} className="esperienza-card-link" style={{ flex: '0 0 50%', minWidth: '100%' }}>
                 <div className="esperienza-card" style={{ height: 'auto' }}>
                   <h3>{exp.titolo}</h3>
                   <p><span>Azienda:</span> {exp.azienda}</p>

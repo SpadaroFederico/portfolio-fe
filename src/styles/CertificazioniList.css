@@ -1,7 +1,7 @@
 .certificazioni-page {
-  width: 104%;
+  max-width: 1000px;
   margin: 5rem auto;
-  padding: 0 1rem;
+  padding: 2rem;
   background: radial-gradient(circle at top, rgba(25,0,50,0.9) 0%, rgba(0,0,0,0.85) 100%);
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
