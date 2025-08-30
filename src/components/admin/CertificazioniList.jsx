@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { DataContext } from '../../context/DataContext';
 import '../../styles/CertificazioniList.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -7,14 +7,6 @@ import 'swiper/css';
 export default function CertificazioniList({ isAdmin = false, onEdit, onDelete }) {
   const { certificazioni } = useContext(DataContext);
   const [expandedId, setExpandedId] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 450);
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   if (!certificazioni || certificazioni.length === 0) {
     return (
@@ -26,7 +18,7 @@ export default function CertificazioniList({ isAdmin = false, onEdit, onDelete }
   }
 
   return (
-    <div className={isAdmin ? 'admin-certificazioni' : 'certificazioni-page'} style={{ width: isMobile ? '95%' : '100%' }}>
+    <div className={isAdmin ? 'admin-certificazioni' : 'certificazioni-page'}>
       <h2>Certificazioni</h2>
 
       {isAdmin ? (
@@ -52,15 +44,15 @@ export default function CertificazioniList({ isAdmin = false, onEdit, onDelete }
         <Swiper
           className="certificazioni-carousel"
           spaceBetween={16}
-          slidesPerView={isMobile ? 'auto' : 1.2}
+          slidesPerView={'auto'}
         >
           {certificazioni.map(cert => {
             const isExpanded = expandedId === cert.id;
             const CardWrapper = cert.img ? 'a' : 'div';
             const wrapperProps = cert.img ? { href: cert.img, target: "_blank", rel: "noopener noreferrer" } : {};
             return (
-              <SwiperSlide key={cert.id} className="cert-card-link" style={{ flex: '0 0 85%', minWidth: '280px' }}>
-                <div className="cert-card" style={{ height: 'auto' }}>
+              <SwiperSlide key={cert.id} className="cert-card-link">
+                <div className="cert-card">
                   <CardWrapper {...wrapperProps} className="img-wrapper">
                     {cert.img && <img src={cert.img} alt={`Certificato ${cert.titolo}`} />}
                   </CardWrapper>

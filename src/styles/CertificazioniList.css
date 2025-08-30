@@ -1,7 +1,9 @@
+/* Contenitore pubblico */
 .certificazioni-page {
-  width: 104%;
-  margin: 5rem auto;
-  padding: 0 1rem;
+  width: 95%;
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem;
   background: radial-gradient(circle at top, rgba(25,0,50,0.9) 0%, rgba(0,0,0,0.85) 100%);
   border-radius: 16px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
@@ -10,8 +12,8 @@
 
 .certificazioni-page h2 {
   text-align: center;
-  font-size: 2rem;
-  margin-bottom: 2.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
   letter-spacing: 1px;
   background: linear-gradient(90deg, #ff00ff, #00ffff);
   -webkit-background-clip: text;
@@ -19,10 +21,10 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Carosello */
+/* Carosello swiper */
 .certificazioni-carousel {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding-bottom: 1rem;
@@ -32,94 +34,81 @@
   display: none;
 }
 
-
-.certificazioni-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  grid-auto-rows: 1fr;
-  gap: 1.8rem;
-}
+/* Card pubblica */
 .cert-card-link {
-  display: block;
+  flex: 0 0 80%;
+  min-width: 260px;
   text-decoration: none;
   color: inherit;
-  padding: 6px; /* spazio tra bordo e contenuto */
-  border-radius: 12px; /* arrotondamento coerente con la card */
-  background-clip: padding-box; /* evita che il bordo si sovrapponga al contenuto */
 }
 
-/* Card vera e propria */
 .cert-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  padding: 1.2rem;
-  height: 85%; /* ridotta di ~15% */
+  padding: 1rem;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   backdrop-filter: blur(6px);
   border: 2px solid transparent;
   border-image: linear-gradient(135deg, #ff00ff, #00ffff) 1;
 }
 
 .cert-card:hover {
-  cursor: pointer;
-}
-
-.cert-card img {
-  display: block;
-  margin: 0 auto 1rem;
-  width: auto;          /* mantiene la larghezza naturale */
-  max-width: 100%;       /* limita la dimensione massima */
-  height: auto;         /* mantiene proporzioni */
-  max-height: 180px;    /* evita che l’immagine diventi troppo alta */
-}
-
-.cert-card .img-wrapper {
-  display: flex;
-  align-items: center;  /* centra verticalmente l’immagine */
-  justify-content: center; /* centra orizzontalmente */
-  height: 180;        /* altezza uniforme del contenitore */
-  margin-bottom: 1rem;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 .cert-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-  color: #ff80ff;
-  min-height: 3.5rem;
-}
-
-.cert-card .ente {
-  display: inline-block;
-  font-weight: bold;
-  font-size: 0.85rem;
-  color: #00ffff;
+  font-size: 1.1rem;
   margin-bottom: 0.4rem;
+  color: #ff80ff;
+  text-align: center;
+  min-height: 3rem;
 }
 
-.cert-card .data {
-  font-size: 0.8rem;
-  color: #bbb;
+.cert-card p {
+  font-size: 0.9rem;
+  margin: 0.2rem 0;
+  color: #ddd;
+  text-align: center;
+}
+
+.cert-card .img-wrapper {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 0.8rem;
 }
 
-.cert-card .descrizione {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: #ddd;
-  max-height: 4.5rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.cert-card .img-wrapper img {
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: 6px;
+  object-fit: contain;
 }
 
-.cert-card .descrizione.expanded {
+/* Descrizione troncata */
+.descrizione {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #ddd;
+  max-height: 4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+.descrizione.expanded {
   max-height: none;
 }
 
+/* Pulsante leggi di più */
 .cert-card button {
   background: none;
   border: none;
@@ -138,41 +127,34 @@
   transform: scale(0.97);
 }
 
-/* Admin Certificazioni */
+/* Admin - lista certificazioni */
 .admin-certificazioni {
-  max-width: 400px;
-  margin: 3rem auto;
-  padding: 1.5rem;
+  width: 95%;
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1rem;
   background: linear-gradient(145deg, rgba(20,0,40,0.85), rgba(0,0,0,0.7));
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-  color: #fff;
-  flex-wrap: wrap;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
 .admin-certificazioni h2 {
+  font-size: 1.4rem;
   text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.5rem;
   background: linear-gradient(90deg, #ff00ff, #00ffff);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.admin-certificazioni ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-}
-
 .admin-certificazioni li {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
-  padding: 1rem 1.2rem;
+  padding: 1rem;
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #ff00ff, #00ffff) 1;
+  margin-bottom: 1rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -182,34 +164,35 @@
 }
 
 .admin-certificazioni img {
-  display: block;
-  margin: 0.5rem auto;
-  max-width: 180px;
+  max-width: 160px;
   border-radius: 6px;
+  margin: 0.5rem auto;
+  display: block;
 }
 
 .admin-certificazioni h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin-bottom: 0.4rem;
   color: #ff66ff;
+  text-align: center;
 }
 
 .admin-certificazioni p {
+  font-size: 0.85rem;
   margin: 0.2rem 0;
-  font-size: 0.9rem;
   line-height: 1.3;
   color: #ddd;
+  text-align: center;
 }
 
-.admin-certificazioni span {
-  font-weight: 600;
-  color: #00ffff;
-}
-
-.admin-certificazioni button {
+.admin-actions {
+  text-align: center;
   margin-top: 0.5rem;
-  margin-right: 0.4rem;
-  padding: 0.45rem 0.7rem;
+}
+
+.admin-actions button {
+  margin: 0.2rem;
+  padding: 0.4rem 0.7rem;
   background: linear-gradient(90deg, #c800ff, #00c8ff);
   color: #fff;
   border: none;
@@ -219,64 +202,45 @@
   transition: all 0.2s ease;
 }
 
-.admin-certificazioni button:hover {
+.admin-actions button:hover {
   background: linear-gradient(90deg, #7800c3, #007bff);
 }
 
-.admin-certificazioni button:active {
+.admin-actions button:active {
   transform: scale(0.97);
 }
 
-/* ------------------------------
-   Responsive: Certificazioni
---------------------------------*/
-@media (max-width: 450px) {
-  .certificazioni-list {
-    grid-template-columns: 1fr; /* 1 card per riga */
-    gap: 1rem;
-    padding: 0 1rem;
+/* Breakpoints per tablet e desktop */
+@media(min-width: 600px) {
+  .cert-card {
+    padding: 1.2rem;
+  }
+
+  .cert-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .descrizione {
+    max-height: 4.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media(min-width: 900px) {
+  .certificazioni-page {
+    padding: 2rem;
   }
 
   .cert-card {
-    max-width: 100%;
-    padding: 1rem;
+    padding: 1.5rem;
   }
 
-  .certificazioni-page{
-    padding: 0 1.5rem;
+  .cert-card h3 {
+    font-size: 1.3rem;
   }
 
-  .certificazioni-page h2 {
-    font-size: 1.6rem;
+  .descrizione {
+    font-size: 1rem;
+    max-height: 5rem;
   }
-
-  /* Admin certificazioni */
-  .admin-certificazioni {
-    max-width: 100%;
-    padding: 1rem;
-    margin: 2rem 0;
-  }
-
-  .admin-certificazioni h2 {
-    font-size: 1.4rem;
-  }
-
-  .certificazioni-carousel {
-    gap: 1rem;
-  }
-  .cert-card-link {
-    flex: 0 0 85%;
-  }
-
-  .certificazioni-carousel {
-    width: 100%;
-    max-width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .cert-card-link {
-    flex: 0 0 85%; /* larghezza minima della slide */
-  }
-
 }
